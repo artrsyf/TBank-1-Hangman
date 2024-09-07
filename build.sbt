@@ -1,8 +1,12 @@
-import Dependencies.{Versions => _, _}
+val scala3Version = "3.5.0"
 
-lazy val samples = project
+lazy val root = project
+  .in(file("."))
   .settings(
-    name := "samples",
-    scalaVersion := Versions.scala3,
-    libraryDependencies ++= Seq(scalaTest, scalastic)
+    name := "Scala 3 Project Template", 
+    version := "0.1.0-SNAPSHOT",
+
+    scalaVersion := scala3Version,
+
+    libraryDependencies += "org.scalameta" %% "munit" % "1.0.0" % Test
   )
