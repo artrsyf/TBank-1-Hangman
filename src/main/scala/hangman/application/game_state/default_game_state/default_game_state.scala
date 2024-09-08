@@ -4,7 +4,7 @@ import scala.util.Random
 
 import hangman.infrastructure.category.CategoryRepository
 import hangman.application.game_state.GameState
-import hangman.application.game_difficulty.Difficulty
+import hangman.shared.enums.Difficulty
 
 case class DefaultSessionGameState(
   val categoryRepo: CategoryRepository,

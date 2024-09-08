@@ -1,6 +1,6 @@
 package hangman.application.game_state
 
-import hangman.application.game_difficulty.Difficulty
+import hangman.shared.enums.Difficulty
 import hangman.infrastructure.category.CategoryRepository
 
 trait GameState:

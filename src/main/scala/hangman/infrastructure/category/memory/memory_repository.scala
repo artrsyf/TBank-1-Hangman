@@ -5,20 +5,21 @@ import scala.util.Random
 import hangman.domain.entity.{Category => WordCategory, Word}
 import hangman.domain.dto.{CategoryDto, WordDto}
 import hangman.infrastructure.category.CategoryRepository
+import hangman.shared.enums.Difficulty
 
 class CategoryMemoryRepository() extends CategoryRepository:
   val categories: Map[String, WordCategory] = Map(
     "Animals" -> WordCategory(
       "Animals",
-      List(Word("Cat", "hint1"), Word("Dog", "hint1"))
+      List(Word("Cat", "hint1", Difficulty.Easy), Word("Dog", "hint1", Difficulty.Easy))
     ),
     "Fruits" -> WordCategory(
       "Fruits",
-      List(Word("Apple", "hint1"), Word("Banana", "hint1"))
+      List(Word("Apple", "hint1", Difficulty.Medium), Word("Banana", "hint1", Difficulty.Easy))
     ),
     "Colors" -> WordCategory(
       "Colors",
-      List(Word("Red", "hint1"), Word("Blue", "hint1"))
+      List(Word("Red", "hint1", Difficulty.Easy), Word("Blue", "hint1", Difficulty.Easy))
     )
   )
 
@@ -30,7 +31,7 @@ class CategoryMemoryRepository() extends CategoryRepository:
         Some(
           CategoryDto(
             randomCategory.name,
-            randomCategory.words.map(word => WordDto(word.content, word.hint))
+            randomCategory.words.map(word => WordDto(word.content, word.hint, word.difficulty))
           )
         )
 
@@ -40,7 +41,7 @@ class CategoryMemoryRepository() extends CategoryRepository:
       .map(category =>
         CategoryDto(
           category.name,
-          category.words.map(word => WordDto(word.content, word.hint))
+          category.words.map(word => WordDto(word.content, word.hint, word.difficulty))
         )
       )
 
@@ -50,7 +51,7 @@ class CategoryMemoryRepository() extends CategoryRepository:
         .map(category =>
           CategoryDto(
             category.name,
-            category.words.map(word => WordDto(word.content, word.hint))
+            category.words.map(word => WordDto(word.content, word.hint, word.difficulty))
           )
         )
         .toList
