@@ -22,18 +22,22 @@ case class DefaultSessionGameState(
       difficulty: Difficulty,
       categoryName: String
   ): GameState =
-    val category = categoryRepo.getCategoryByName(categoryName)
-    val (randomWord, hint) = category match
+    val category = 
+      if categoryName == "Random" then categoryRepo.getRandomCategory
+      else categoryRepo.getCategoryByName(categoryName)
+
+    val (randomWord, hint, processedCategoryName) = category match
       case Some(category) =>
         val suitableWords =
           category.words.filter(_.difficulty == difficulty).toSeq
         val randomWordObject = suitableWords(Random.nextInt(category.words.size - 1))
-        (Some(randomWordObject.content), Some(randomWordObject.hint))
+        (Some(randomWordObject.content), Some(randomWordObject.hint), Some(category.name))
 
-      case _ => (None, None) // Вывод??
+      case _ => (None, None, None) // Вывод??
+
     copy(
       choosenDifficulty = Some(difficulty),
-      choosenCategory = Some(categoryName),
+      choosenCategory = processedCategoryName,
       answer = randomWord,
       wordHint = hint,
       attemptsToAnswerCount = Some(6)
