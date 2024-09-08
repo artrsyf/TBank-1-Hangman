@@ -24,8 +24,9 @@ case class DefaultSessionGameState(
     val category = categoryRepo.getCategoryByName(categoryName)
     val randomWord = category match
       case Some(category) =>
-        Some(category.words.toSeq(Random.nextInt(category.words.size)).content)
-      case _ => None // Выод??
+        val suitableWords = category.words.filter(_.difficulty == difficulty).toSeq
+        Some(suitableWords(Random.nextInt(category.words.size - 1)).content)
+      case _ => None // Вывод??
     copy(
       choosenDifficulty = Some(difficulty),
       choosenCategory = Some(categoryName),
