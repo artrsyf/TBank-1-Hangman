@@ -7,32 +7,42 @@ import hangman.application.game_state.GameState
 import hangman.shared.enums.Difficulty
 
 case class DefaultSessionGameState(
-  val categoryRepo: CategoryRepository,
-  val choosenDifficulty: Option[Difficulty] = None,
-  val choosenCategory: Option[String] = None,
-  val answer: Option[String] = None,
-  val adt: Set[Char] = Set.empty, // Текущий результат
-  val attemptsToAnswerCount: Option[Int] = None,
-  val curentAttemptsCount: Int = 0,
-  val isEnded: Boolean = false
+    val categoryRepo: CategoryRepository,
+    val choosenDifficulty: Option[Difficulty] = None,
+    val choosenCategory: Option[String] = None,
+    val answer: Option[String] = None,
+    val wordHint: Option[String] = None,
+    val adt: Set[Char] = Set.empty, // Текущий результат
+    val attemptsToAnswerCount: Option[Int] = None,
+    val curentAttemptsCount: Int = 0,
+    val isEnded: Boolean = false
 ) extends GameState {
 
   override def initializeParams(
-    difficulty: Difficulty,
-    categoryName: String
+      difficulty: Difficulty,
+      categoryName: String
   ): GameState =
     val category = categoryRepo.getCategoryByName(categoryName)
-    val randomWord = category match
+    val (randomWord, hint) = category match
       case Some(category) =>
-        val suitableWords = category.words.filter(_.difficulty == difficulty).toSeq
-        Some(suitableWords(Random.nextInt(category.words.size - 1)).content)
-      case _ => None // Вывод??
+        val suitableWords =
+          category.words.filter(_.difficulty == difficulty).toSeq
+        val randomWordObject = suitableWords(Random.nextInt(category.words.size - 1))
+        (Some(randomWordObject.content), Some(randomWordObject.hint))
+
+      case _ => (None, None) // Вывод??
     copy(
       choosenDifficulty = Some(difficulty),
       choosenCategory = Some(categoryName),
       answer = randomWord,
+      wordHint = hint,
       attemptsToAnswerCount = Some(6)
     )
+
+  override def getAnswerHint: String =
+    wordHint match
+      case Some(hint) => hint
+      case None       => throw new Exception("pending")
 
   override def getCategoryRepo: CategoryRepository =
     categoryRepo
@@ -63,7 +73,7 @@ case class DefaultSessionGameState(
   override def getCurentAttemptsCount: Int =
     curentAttemptsCount
 
-  override def isGameEnded: Boolean = 
+  override def isGameEnded: Boolean =
     isEnded
 
   override def guess(userInput: Char): GameState =
@@ -80,8 +90,10 @@ case class DefaultSessionGameState(
 
         val newAdt = adt + userInputToLower
         val newGameStatus = attemptsToAnswerCount match
-          case Some(value) => 
-            value == curentAttemptsCount + 1 || answerString.toLowerCase.forall(newAdt.contains)
+          case Some(value) =>
+            value == curentAttemptsCount + 1 || answerString.toLowerCase.forall(
+              newAdt.contains
+            )
           case _ => false
 
         copy(

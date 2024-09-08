@@ -12,6 +12,7 @@ trait GameState:
     def getAdt: Set[Char]
     def getAttemptsToAnswerCount: Int
     def getCurentAttemptsCount: Int
+    def getAnswerHint: String
     def isGameEnded: Boolean
 
     def guess(userInput: Char): GameState
