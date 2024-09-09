@@ -7,6 +7,7 @@ import hangman.application.game_state.GameState
 import hangman.application.session.default_session.DefaultSession
 import hangman.application.game_state.default_game_state.DefaultSessionGameState
 import hangman.infrastructure.category.memory.CategoryMemoryRepository
+import hangman.shared.constants.ConsoleOutput
 
 import scala.io.StdIn
 import scala.util.Try
@@ -21,11 +22,7 @@ case class ConsoleDisplay(
         copy(gameController = updatedGameController)
 
   def readAndUpdateUserParams: ConsoleDisplay =
-    println("""Hangman game
-            Choose your difficulty:
-                1) Easy;
-                2) Medium;
-                3) Hard """)
+    println(ConsoleOutput.difficultyDialog)
 
     val difficultyInput = StdIn.readLine()
     val difficultyNumber = Try(difficultyInput.toInt).toOption match {
@@ -76,15 +73,7 @@ case class ConsoleDisplay(
 
   def renderLoseEnding: Unit = 
     println("Lose")
-    println("""
-      +---+
-      |   |
-      O   |
-     /|\  |
-     / \  |
-          |
-      =========
-      """)
+    println(ConsoleOutput.loseScreenHangman)
 
   def renderWinEnding: Unit = 
     println("Win")
@@ -103,12 +92,8 @@ case class ConsoleDisplay(
       renderEnding
       ConsoleDisplay(gameController)
 
-    println(
-      s"Category: ${gameCategory}"
-    )
-    println(
-      s"Difficulty: ${gameDifficulty}"
-    )
+    println(s"Category: ${gameCategory}")
+    println(s"Difficulty: ${gameDifficulty}")
     println("|")
     println("|")
     println("|")
@@ -121,62 +106,14 @@ case class ConsoleDisplay(
     println("|")
     
     currentAttemptsCount match
-      case 0 => println("""
-      +---+
-      |   |
-          |
-          |
-          |
-          |
-      =========
-      """)
-      case 1 => println("""
-      +---+
-      |   |
-      O   |
-          |
-          |
-          |
-      =========
-      """)
-      case 2 => println("""
-      +---+
-      |   |
-      O   |
-      |   |
-          |
-          |
-      =========
-      """)
+      case 0 => println(ConsoleOutput.sixAttemtsLeftHangman)
+      case 1 => println(ConsoleOutput.fiveAttemtsLeftHangman)
+      case 2 => println(ConsoleOutput.fourAttemtsLeftHangman)
       case 3 => 
         println(s"Hint: $answerHint")
-        println("""
-      +---+
-      |   |
-      O   |
-     /|   |
-          |
-          |
-      =========
-      """)
-      case 4 => println("""
-      +---+
-      |   |
-      O   |
-     /|\  |
-          |
-          |
-      =========
-      """)
-      case 5 => println("""
-      +---+
-      |   |
-      O   |
-     /|\  |
-     /    |
-          |
-      =========
-      """)
+        println(ConsoleOutput.threeAttemtsLeftHangman)
+      case 4 => println(ConsoleOutput.twoAttemtsLeftHangman)
+      case 5 => println(ConsoleOutput.oneAttemtsLeftHangman)
       case _ => println("pending")
 
     println("|")
