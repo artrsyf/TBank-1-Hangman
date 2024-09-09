@@ -5,6 +5,7 @@ import scala.util.Random
 import hangman.infrastructure.category.CategoryRepository
 import hangman.application.game_state.GameState
 import hangman.shared.enums.Difficulty
+import hangman.shared.constants.GameConfig
 
 case class DefaultSessionGameState(
     val categoryRepo: CategoryRepository,
@@ -40,7 +41,7 @@ case class DefaultSessionGameState(
       choosenCategory = processedCategoryName,
       answer = randomWord,
       wordHint = hint,
-      attemptsToAnswerCount = Some(6)
+      attemptsToAnswerCount = Some(GameConfig.maxAttempts)
     )
 
   override def getAnswerHint: String =
