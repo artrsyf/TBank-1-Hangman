@@ -24,9 +24,7 @@ def gameLoop(consoleDisplay: ConsoleDisplay): Unit = {
   // Рендерим текущее состояние игры
   val updatedGameConsole = consoleDisplay.renderGame
 
-  if !updatedGameConsole.gameController.userSession.getCurrentGameState.isGameEnded then
-    gameLoop(updatedGameConsole)
+  if !updatedGameConsole.gameController.userSession.getCurrentGameState.isGameEnded
+  then gameLoop(updatedGameConsole)
   else updatedGameConsole.renderEnding
 }
-
-  

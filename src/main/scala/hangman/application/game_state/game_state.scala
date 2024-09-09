@@ -4,15 +4,15 @@ import hangman.shared.enums.Difficulty
 import hangman.infrastructure.category.CategoryRepository
 
 trait GameState:
-    def getCategoryRepo: CategoryRepository
-    def initializeParams(difficulty: Difficulty, category: String): GameState
-    def getCategory: String
-    def getDifficulty: Difficulty
-    def getAnswer: String
-    def getAdt: Set[Char]
-    def getAttemptsToAnswerCount: Int
-    def getCurentAttemptsCount: Int
-    def getAnswerHint: String
-    def isGameEnded: Boolean
+  def getCategoryRepo: CategoryRepository
+  def initializeParams(difficulty: Difficulty, category: String): GameState
+  def getCategory: String
+  def getDifficulty: Difficulty
+  def getAnswer: String
+  def getAdt: Set[Char]
+  def getAttemptsToAnswerCount: Int
+  def getCurentAttemptsCount: Int
+  def getAnswerHint: String
+  def isGameEnded: Boolean
 
-    def guess(userInput: Char): GameState
+  def guess(userInput: Char): GameState

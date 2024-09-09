@@ -7,4 +7,3 @@ case class Word(
     val hint: String,
     val difficulty: Difficulty
 )
-    

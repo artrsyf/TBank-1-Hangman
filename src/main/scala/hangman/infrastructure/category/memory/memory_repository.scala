@@ -13,22 +13,54 @@ class CategoryMemoryRepository() extends CategoryRepository:
       "Animals",
       List(
         Word("Cat", "A small domesticated carnivorous mammal", Difficulty.Easy),
-        Word("Dog", "A domesticated carnivorous mammal that typically has a long snout", Difficulty.Easy),
+        Word(
+          "Dog",
+          "A domesticated carnivorous mammal that typically has a long snout",
+          Difficulty.Easy
+        ),
         Word("Elephant", "A large mammal with a trunk", Difficulty.Hard),
-        Word("Giraffe", "The tallest living terrestrial animal", Difficulty.Hard),
+        Word(
+          "Giraffe",
+          "The tallest living terrestrial animal",
+          Difficulty.Hard
+        ),
         Word("Lion", "Known as the king of the jungle", Difficulty.Medium),
-        Word("Kangaroo", "An animal known for its jumping ability", Difficulty.Medium)
+        Word(
+          "Kangaroo",
+          "An animal known for its jumping ability",
+          Difficulty.Medium
+        )
       )
     ),
     "Fruits" -> WordCategory(
       "Fruits",
       List(
-        Word("Apple", "A round fruit with red or green skin", Difficulty.Medium),
+        Word(
+          "Apple",
+          "A round fruit with red or green skin",
+          Difficulty.Medium
+        ),
         Word("Banana", "A long curved fruit with yellow skin", Difficulty.Easy),
-        Word("Pineapple", "A tropical fruit with spiky skin and sweet flesh", Difficulty.Hard),
-        Word("Strawberry", "A red fruit with seeds on the outside", Difficulty.Hard),
-        Word("Grapes", "Small round fruits often used to make wine", Difficulty.Medium),
-        Word("Watermelon", "A large fruit with green skin and red flesh", Difficulty.Hard)
+        Word(
+          "Pineapple",
+          "A tropical fruit with spiky skin and sweet flesh",
+          Difficulty.Hard
+        ),
+        Word(
+          "Strawberry",
+          "A red fruit with seeds on the outside",
+          Difficulty.Hard
+        ),
+        Word(
+          "Grapes",
+          "Small round fruits often used to make wine",
+          Difficulty.Medium
+        ),
+        Word(
+          "Watermelon",
+          "A large fruit with green skin and red flesh",
+          Difficulty.Hard
+        )
       )
     ),
     "Colors" -> WordCategory(
@@ -36,7 +68,11 @@ class CategoryMemoryRepository() extends CategoryRepository:
       List(
         Word("Red", "The color of fire and blood", Difficulty.Easy),
         Word("Blue", "The color of the sky and the ocean", Difficulty.Easy),
-        Word("Turquoise", "A blue-green color named after a mineral", Difficulty.Hard),
+        Word(
+          "Turquoise",
+          "A blue-green color named after a mineral",
+          Difficulty.Hard
+        ),
         Word("Magenta", "A purplish-red color", Difficulty.Medium),
         Word("Crimson", "A rich, deep red color", Difficulty.Medium),
         Word("Chartreuse", "A color between yellow and green", Difficulty.Hard)
@@ -46,10 +82,26 @@ class CategoryMemoryRepository() extends CategoryRepository:
       "Countries",
       List(
         Word("Japan", "An island country in East Asia", Difficulty.Medium),
-        Word("Brazil", "The largest country in South America", Difficulty.Medium),
-        Word("Germany", "A country known for its beer and cars", Difficulty.Medium),
-        Word("Switzerland", "Known for its mountains and chocolate", Difficulty.Hard),
-        Word("Australia", "The smallest continent and a country", Difficulty.Hard),
+        Word(
+          "Brazil",
+          "The largest country in South America",
+          Difficulty.Medium
+        ),
+        Word(
+          "Germany",
+          "A country known for its beer and cars",
+          Difficulty.Medium
+        ),
+        Word(
+          "Switzerland",
+          "Known for its mountains and chocolate",
+          Difficulty.Hard
+        ),
+        Word(
+          "Australia",
+          "The smallest continent and a country",
+          Difficulty.Hard
+        ),
         Word("Egypt", "Home to the Great Pyramids", Difficulty.Medium)
       )
     ),
@@ -57,11 +109,31 @@ class CategoryMemoryRepository() extends CategoryRepository:
       "Sports",
       List(
         Word("Soccer", "The world's most popular sport", Difficulty.Medium),
-        Word("Basketball", "A sport involving shooting hoops", Difficulty.Medium),
-        Word("Tennis", "Played with rackets and a small ball", Difficulty.Medium),
-        Word("Archery", "A sport of shooting arrows with a bow", Difficulty.Hard),
-        Word("Gymnastics", "A sport involving acrobatic exercises", Difficulty.Hard),
-        Word("Baseball", "A bat-and-ball game played between two teams", Difficulty.Hard)
+        Word(
+          "Basketball",
+          "A sport involving shooting hoops",
+          Difficulty.Medium
+        ),
+        Word(
+          "Tennis",
+          "Played with rackets and a small ball",
+          Difficulty.Medium
+        ),
+        Word(
+          "Archery",
+          "A sport of shooting arrows with a bow",
+          Difficulty.Hard
+        ),
+        Word(
+          "Gymnastics",
+          "A sport involving acrobatic exercises",
+          Difficulty.Hard
+        ),
+        Word(
+          "Baseball",
+          "A bat-and-ball game played between two teams",
+          Difficulty.Hard
+        )
       )
     )
   )
@@ -74,7 +146,9 @@ class CategoryMemoryRepository() extends CategoryRepository:
         Some(
           CategoryDto(
             randomCategory.name,
-            randomCategory.words.map(word => WordDto(word.content, word.hint, word.difficulty))
+            randomCategory.words.map(word =>
+              WordDto(word.content, word.hint, word.difficulty)
+            )
           )
         )
 
@@ -84,7 +158,8 @@ class CategoryMemoryRepository() extends CategoryRepository:
       .map(category =>
         CategoryDto(
           category.name,
-          category.words.map(word => WordDto(word.content, word.hint, word.difficulty))
+          category.words
+            .map(word => WordDto(word.content, word.hint, word.difficulty))
         )
       )
 
@@ -94,7 +169,9 @@ class CategoryMemoryRepository() extends CategoryRepository:
         .map(category =>
           CategoryDto(
             category.name,
-            category.words.map(word => WordDto(word.content, word.hint, word.difficulty))
+            category.words.map(word =>
+              WordDto(word.content, word.hint, word.difficulty)
+            )
           )
         )
         .toList

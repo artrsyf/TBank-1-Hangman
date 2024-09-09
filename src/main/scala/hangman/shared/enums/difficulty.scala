@@ -6,6 +6,6 @@ enum Difficulty:
   case Easy, Medium, Hard
 
 object Difficulty:
-  def random: Difficulty = 
+  def random: Difficulty =
     val values = Difficulty.values
     values(Random.nextInt(values.length))

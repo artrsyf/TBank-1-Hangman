@@ -16,10 +16,10 @@ case class ConsoleDisplay(
     val gameController: GameController
 ) {
 
-  def guess(userInput: Char): ConsoleDisplay = 
-        val updatedGameController = gameController.guess(userInput)
+  def guess(userInput: Char): ConsoleDisplay =
+    val updatedGameController = gameController.guess(userInput)
 
-        copy(gameController = updatedGameController)
+    copy(gameController = updatedGameController)
 
   def readAndUpdateUserParams: ConsoleDisplay =
     println(ConsoleOutput.difficultyDialog)
@@ -33,22 +33,20 @@ case class ConsoleDisplay(
     println("Choose a category:")
 
     val categories = gameController.getOpenCategories.zipWithIndex
-    categories.foreach {
-      case (category, index) =>
-        println(s"${index + 1}) $category")
+    categories.foreach { case (category, index) =>
+      println(s"${index + 1}) $category")
     }
 
     val categoryInput = StdIn.readLine()
     val categoryNumber = Try(categoryInput.toInt).toOption match {
       case Some(number) if number > 0 && number <= categories.size => number
-      case _                           => -1
+      case _                                                       => -1
     }
-    
-    val category = 
+
+    val category =
       if categoryNumber > 0 then
         gameController.getOpenCategories(categoryNumber - 1)
-      else
-        "Random"
+      else "Random"
 
     val initedGameController =
       gameController.processUserInput(difficultyNumber, category)
@@ -59,36 +57,42 @@ case class ConsoleDisplay(
     val os = System.getProperty("os.name").toLowerCase
     if os.contains("win") then
       new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor()
-    else
-      Runtime.getRuntime.exec("clear")
+    else Runtime.getRuntime.exec("clear")
 
-  def renderEnding: Unit = 
+  def renderEnding: Unit =
     clearConsole
-    
-    val currentAttemptsCount = gameController.userSession.getCurrentGameState.getCurentAttemptsCount
-    val attemptsToAnswerCount = gameController.userSession.getCurrentGameState.getAttemptsToAnswerCount
+
+    val currentAttemptsCount =
+      gameController.userSession.getCurrentGameState.getCurentAttemptsCount
+    val attemptsToAnswerCount =
+      gameController.userSession.getCurrentGameState.getAttemptsToAnswerCount
 
     if currentAttemptsCount == attemptsToAnswerCount then renderLoseEnding
     else renderWinEnding
 
-  def renderLoseEnding: Unit = 
+  def renderLoseEnding: Unit =
     println("Lose")
     println(ConsoleOutput.loseScreenHangman)
 
-  def renderWinEnding: Unit = 
+  def renderWinEnding: Unit =
     println("Win")
 
   def renderGame: ConsoleDisplay =
     clearConsole
 
-    val gameCategory = gameController.userSession.getCurrentGameState.getCategory
-    val gameDifficulty = gameController.userSession.getCurrentGameState.getDifficulty
-    val currentAttemptsCount = gameController.userSession.getCurrentGameState.getCurentAttemptsCount
-    val attemptsToAnswerCount = gameController.userSession.getCurrentGameState.getAttemptsToAnswerCount
+    val gameCategory =
+      gameController.userSession.getCurrentGameState.getCategory
+    val gameDifficulty =
+      gameController.userSession.getCurrentGameState.getDifficulty
+    val currentAttemptsCount =
+      gameController.userSession.getCurrentGameState.getCurentAttemptsCount
+    val attemptsToAnswerCount =
+      gameController.userSession.getCurrentGameState.getAttemptsToAnswerCount
     val gameStatus = gameController.userSession.getCurrentGameState.isGameEnded
-    val answerHint = gameController.userSession.getCurrentGameState.getAnswerHint
+    val answerHint =
+      gameController.userSession.getCurrentGameState.getAnswerHint
 
-    if gameStatus then 
+    if gameStatus then
       renderEnding
       ConsoleDisplay(gameController)
 
@@ -104,12 +108,12 @@ case class ConsoleDisplay(
     println("|")
     println("|")
     println("|")
-    
+
     currentAttemptsCount match
       case 0 => println(ConsoleOutput.sixAttemtsLeftHangman)
       case 1 => println(ConsoleOutput.fiveAttemtsLeftHangman)
       case 2 => println(ConsoleOutput.fourAttemtsLeftHangman)
-      case 3 => 
+      case 3 =>
         println(s"Hint: $answerHint")
         println(ConsoleOutput.threeAttemtsLeftHangman)
       case 4 => println(ConsoleOutput.twoAttemtsLeftHangman)

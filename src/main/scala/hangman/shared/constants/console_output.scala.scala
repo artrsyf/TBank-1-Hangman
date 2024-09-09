@@ -62,7 +62,7 @@ object ConsoleOutput:
           |
       =========
       """
-  
+
   val loseScreenHangman: String = """
       +---+
       |   |

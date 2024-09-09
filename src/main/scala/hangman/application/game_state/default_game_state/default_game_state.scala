@@ -23,7 +23,7 @@ case class DefaultSessionGameState(
       difficulty: Difficulty,
       categoryName: String
   ): GameState =
-    val category = 
+    val category =
       if categoryName == "Random" then categoryRepo.getRandomCategory
       else categoryRepo.getCategoryByName(categoryName)
 
@@ -31,8 +31,14 @@ case class DefaultSessionGameState(
       case Some(category) =>
         val suitableWords =
           category.words.filter(_.difficulty == difficulty).toSeq
-        val randomWordObject = suitableWords(Random.nextInt(suitableWords.size - 1))
-        (Some(randomWordObject.content), Some(randomWordObject.hint), Some(category.name))
+        val randomWordObject = suitableWords(
+          Random.nextInt(suitableWords.size - 1)
+        )
+        (
+          Some(randomWordObject.content),
+          Some(randomWordObject.hint),
+          Some(category.name)
+        )
 
       case _ => (None, None, None) // Вывод??
 
