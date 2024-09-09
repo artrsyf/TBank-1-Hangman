@@ -31,7 +31,7 @@ case class DefaultSessionGameState(
       case Some(category) =>
         val suitableWords =
           category.words.filter(_.difficulty == difficulty).toSeq
-        val randomWordObject = suitableWords(Random.nextInt(category.words.size - 1))
+        val randomWordObject = suitableWords(Random.nextInt(suitableWords.size - 1))
         (Some(randomWordObject.content), Some(randomWordObject.hint), Some(category.name))
 
       case _ => (None, None, None) // Вывод??
