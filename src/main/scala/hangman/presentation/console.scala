@@ -10,8 +10,10 @@ import hangman.application.game_state.GameState
 import hangman.shared.constants.ConsoleOutput
 
 case class ConsoleDisplay(
-  val gameController: GameController
-) {
+  private val gameController: GameController
+):
+
+  def getGameController: GameController = gameController
 
   def guess(userInput: Char): ConsoleDisplay =
     val updatedGameController = gameController.guess(userInput)
@@ -61,9 +63,9 @@ case class ConsoleDisplay(
     clearConsole
 
     val currentAttemptsCount =
-      gameController.userSession.getCurrentGameState.getCurentAttemptsCount
+      gameController.getCurrentUserSession.getCurrentGameState.getCurentAttemptsCount
     val attemptsToAnswerCount =
-      gameController.userSession.getCurrentGameState.getAttemptsToAnswerCount
+      gameController.getCurrentUserSession.getCurrentGameState.getAttemptsToAnswerCount
 
     if currentAttemptsCount == attemptsToAnswerCount then renderLoseEnding
     else renderWinEnding
@@ -79,16 +81,16 @@ case class ConsoleDisplay(
     clearConsole
 
     val gameCategory =
-      gameController.userSession.getCurrentGameState.getCategory
+      gameController.getCurrentUserSession.getCurrentGameState.getCategory
     val gameDifficulty =
-      gameController.userSession.getCurrentGameState.getDifficulty
+      gameController.getCurrentUserSession.getCurrentGameState.getDifficulty
     val currentAttemptsCount =
-      gameController.userSession.getCurrentGameState.getCurentAttemptsCount
+      gameController.getCurrentUserSession.getCurrentGameState.getCurentAttemptsCount
     val attemptsToAnswerCount =
-      gameController.userSession.getCurrentGameState.getAttemptsToAnswerCount
-    val gameStatus = gameController.userSession.getCurrentGameState.isGameEnded
+      gameController.getCurrentUserSession.getCurrentGameState.getAttemptsToAnswerCount
+    val gameStatus = gameController.getCurrentUserSession.getCurrentGameState.isGameEnded
     val answerHint =
-      gameController.userSession.getCurrentGameState.getAnswerHint
+      gameController.getCurrentUserSession.getCurrentGameState.getAnswerHint
 
     if gameStatus then
       renderEnding
@@ -123,4 +125,3 @@ case class ConsoleDisplay(
     val inputChar = StdIn.readChar()
 
     guess(inputChar)
-}

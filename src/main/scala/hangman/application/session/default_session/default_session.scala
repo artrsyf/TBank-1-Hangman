@@ -5,8 +5,8 @@ import hangman.application.game_state.GameState
 import hangman.shared.enums.Difficulty
 
 case class DefaultSession(
-  val userId: Int,
-  val currentGameState: GameState
+  private val userId: Int,
+  private val currentGameState: GameState
 ) extends Session {
 
   override def defineGameParams(

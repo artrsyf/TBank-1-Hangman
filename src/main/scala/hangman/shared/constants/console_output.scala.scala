@@ -5,8 +5,8 @@ object ConsoleOutput:
     """|Hangman Game
        |
        |Choose your difficulty:
-       |    1) Easy;
-       |    2) Medium;
+       |    1) Easy
+       |    2) Medium
        |    3) Hard
        |""".stripMargin
 

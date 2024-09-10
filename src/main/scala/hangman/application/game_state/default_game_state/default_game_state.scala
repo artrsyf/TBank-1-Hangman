@@ -8,15 +8,15 @@ import hangman.shared.enums.Difficulty
 import hangman.shared.constants.GameConfig
 
 case class DefaultSessionGameState(
-  val categoryRepo: CategoryRepository,
-  val choosenDifficulty: Option[Difficulty] = None,
-  val choosenCategory: Option[String] = None,
-  val answer: Option[String] = None,
-  val wordHint: Option[String] = None,
-  val adt: Set[Char] = Set.empty,
-  val attemptsToAnswerCount: Option[Int] = None,
-  val curentAttemptsCount: Int = 0,
-  val isEnded: Boolean = false
+  private val categoryRepo: CategoryRepository,
+  private val choosenDifficulty: Option[Difficulty] = None,
+  private val choosenCategory: Option[String] = None,
+  private val answer: Option[String] = None,
+  private val wordHint: Option[String] = None,
+  private val adt: Set[Char] = Set.empty,
+  private val attemptsToAnswerCount: Option[Int] = None,
+  private val curentAttemptsCount: Int = 0,
+  private val isEnded: Boolean = false
 ) extends GameState {
 
   override def initializeParams(

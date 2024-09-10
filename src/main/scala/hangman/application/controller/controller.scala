@@ -2,7 +2,9 @@ package hangman.application.controller
 
 import hangman.application.session.Session
 
-case class GameController(val userSession: Session):
+case class GameController(
+  private val userSession: Session
+):
   def processUserInput(
     difficultyNumber: Int,
     choosenCategory: String
@@ -11,6 +13,8 @@ case class GameController(val userSession: Session):
       userSession.defineGameParams(difficultyNumber, choosenCategory)
 
     copy(userSession = initializedSession)
+
+  def getCurrentUserSession: Session = userSession
 
   def getGuessString: String =
     val currentState = userSession.getCurrentGameState

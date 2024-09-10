@@ -8,7 +8,7 @@ import hangman.infrastructure.category.CategoryRepository
 import hangman.shared.enums.Difficulty
 
 class CategoryMemoryRepository() extends CategoryRepository:
-  val categories: Map[String, WordCategory] = Map(
+  private val categories: Map[String, WordCategory] = Map(
     "Animals" -> WordCategory(
       "Animals",
       List(
