@@ -6,8 +6,8 @@ import hangman.domain.dto.{CategoryDto, WordDto}
 
 case class GameController(val userSession: Session):
   def processUserInput(
-      difficultyNumber: Int,
-      choosenCategory: String
+    difficultyNumber: Int,
+    choosenCategory: String
   ): GameController =
     val initializedSession =
       userSession.defineGameParams(difficultyNumber, choosenCategory)

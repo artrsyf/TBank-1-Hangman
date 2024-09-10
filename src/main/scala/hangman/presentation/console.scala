@@ -13,7 +13,7 @@ import scala.io.StdIn
 import scala.util.Try
 
 case class ConsoleDisplay(
-    val gameController: GameController
+  val gameController: GameController
 ) {
 
   def guess(userInput: Char): ConsoleDisplay =

@@ -7,12 +7,12 @@ import hangman.infrastructure.category.memory.CategoryMemoryRepository
 import hangman.shared.enums.Difficulty
 
 case class DefaultSession(
-    val userId: Int,
-    val currentGameState: GameState
+  val userId: Int,
+  val currentGameState: GameState
 ) extends Session {
   override def defineGameParams(
-      difficultyNumber: Int,
-      category: String
+    difficultyNumber: Int,
+    category: String
   ): Session =
     val difficulty = difficultyNumber match
       case 1 => Difficulty.Easy
