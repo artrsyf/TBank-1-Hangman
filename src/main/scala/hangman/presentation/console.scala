@@ -21,6 +21,7 @@ case class ConsoleDisplay(
     copy(gameController = updatedGameController)
 
   def readAndUpdateUserParams: ConsoleDisplay =
+    clearConsole
     println(ConsoleOutput.difficultyDialog)
 
     val difficultyInput = StdIn.readLine()
