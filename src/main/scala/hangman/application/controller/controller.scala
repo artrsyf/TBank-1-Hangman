@@ -35,7 +35,9 @@ case class GameController(
     val gameState = userSession.getCurrentGameState
 
     val categories = gameState.getCategoryRepo.getAllCategories.getOrElse(
-      throw new NoSuchElementException("There is not a single category specified")
+      throw new NoSuchElementException(
+        "There is not a single category specified"
+      )
     )
 
     categories.map(category => category.name)

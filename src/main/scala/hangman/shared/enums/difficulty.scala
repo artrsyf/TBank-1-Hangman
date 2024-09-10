@@ -8,5 +8,5 @@ enum Difficulty:
 object Difficulty:
   def random: Difficulty =
     val values = Difficulty.values
-    
+
     values(Random.nextInt(values.length))

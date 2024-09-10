@@ -42,7 +42,10 @@ case class DefaultSessionGameState(
             Some(randomWordObject.hint),
             Some(category.name)
           )
-        else throw new IllegalArgumentException("No suitable words found for the given difficulty.")
+        else
+          throw new IllegalArgumentException(
+            "No suitable words found for the given difficulty."
+          )
 
       case _ => (None, None, None)
 
@@ -64,12 +67,12 @@ case class DefaultSessionGameState(
   override def getCategory: String =
     choosenCategory match
       case Some(category) => category
-      case None           => throw new Exception("Category hasn't been initialized")
+      case None => throw new Exception("Category hasn't been initialized")
 
   override def getDifficulty: Difficulty =
     choosenDifficulty match
       case Some(difficulty) => difficulty
-      case None             => throw new Exception("Difficulty hasn't been initialized")
+      case None => throw new Exception("Difficulty hasn't been initialized")
 
   override def getAnswer: String =
     answer match
@@ -81,7 +84,7 @@ case class DefaultSessionGameState(
   override def getAttemptsToAnswerCount: Int =
     attemptsToAnswerCount match
       case Some(count) => count
-      case None        => throw new Exception("Attempts havn't been initialized")
+      case None => throw new Exception("Attempts havn't been initialized")
 
   override def getCurentAttemptsCount: Int = curentAttemptsCount
 

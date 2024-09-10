@@ -23,14 +23,16 @@ class DefaultSessionGameStateSpec extends AnyFunSuite:
     val categoryDto = categoryRepo.getCategoryByName(categoryString)
     val categoryWordDtos = categoryDto match
       case Some(category) => category.words
-      case _ => List()
+      case _              => List()
 
     val words = categoryWordDtos.map(wordDto => wordDto.content)
-    val currentWordDto = categoryWordDtos.find(wordDto => wordDto.content == initializedGame.getAnswer)
+    val currentWordDto = categoryWordDtos.find(wordDto =>
+      wordDto.content == initializedGame.getAnswer
+    )
 
     assert(currentWordDto != None)
     currentWordDto match
-      case Some(wordDto) => 
+      case Some(wordDto) =>
         assert(wordDto.content == initializedGame.getAnswer)
         assert(wordDto.hint == initializedGame.getAnswerHint)
 
@@ -51,7 +53,6 @@ class DefaultSessionGameStateSpec extends AnyFunSuite:
 
     val incorrectChar = '1'
     val afterIncorrectGuessGame = afterGuessGame.guess(incorrectChar)
-    
+
     assert(afterIncorrectGuessGame.getAdt.contains(incorrectChar))
     assert(afterIncorrectGuessGame.getCurentAttemptsCount == 1)
-

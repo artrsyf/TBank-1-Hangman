@@ -54,7 +54,7 @@ case class ConsoleDisplay(
 
   def clearConsole: Unit =
     val os = System.getProperty("os.name").toLowerCase
-    
+
     if os.contains("win") then
       new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor()
     else Runtime.getRuntime.exec("clear")
@@ -88,7 +88,8 @@ case class ConsoleDisplay(
       gameController.getCurrentUserSession.getCurrentGameState.getCurentAttemptsCount
     val attemptsToAnswerCount =
       gameController.getCurrentUserSession.getCurrentGameState.getAttemptsToAnswerCount
-    val gameStatus = gameController.getCurrentUserSession.getCurrentGameState.isGameEnded
+    val gameStatus =
+      gameController.getCurrentUserSession.getCurrentGameState.isGameEnded
     val answerHint =
       gameController.getCurrentUserSession.getCurrentGameState.getAnswerHint
 
@@ -120,7 +121,7 @@ case class ConsoleDisplay(
 
     println(gameController.getGuessString)
     println("\n")
-    
+
     println("Enter some char:")
     val inputChar = StdIn.readChar()
 

@@ -7,13 +7,13 @@ class CategoryMemoryRepositorySpec extends AnyFunSuite: // pending
     val repo = CategoryMemoryRepository()
 
     assert(repo.getRandomCategory != None)
-  
+
   test("CategoryMemoryRepository.getCategoryByName success"):
     val repo = CategoryMemoryRepository()
     val testCategoryName = "Fruits"
 
     assert(repo.getCategoryByName(testCategoryName) != None)
-  
+
   test("CategoryMemoryRepository.getAllCategories success"):
     val repo = CategoryMemoryRepository()
     val categories = repo.getAllCategories

@@ -1,7 +1,7 @@
 package hangman.shared.constants
 
 object ConsoleOutput:
-  val difficultyDialog: String = 
+  val difficultyDialog: String =
     """|Hangman Game
        |
        |Choose your difficulty:
