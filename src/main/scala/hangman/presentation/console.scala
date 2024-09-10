@@ -27,7 +27,7 @@ case class ConsoleDisplay(
       case _                           => -1
     }
 
-    println("Choose a category:")
+    println("\nChoose a category:")
 
     val categories = gameController.getOpenCategories.zipWithIndex
     categories.foreach { case (category, index) =>
@@ -52,6 +52,7 @@ case class ConsoleDisplay(
 
   def clearConsole: Unit =
     val os = System.getProperty("os.name").toLowerCase
+    
     if os.contains("win") then
       new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor()
     else Runtime.getRuntime.exec("clear")
@@ -68,11 +69,11 @@ case class ConsoleDisplay(
     else renderWinEnding
 
   def renderLoseEnding: Unit =
-    println("Lose")
+    println("You've lost")
     println(ConsoleOutput.loseScreenHangman)
 
   def renderWinEnding: Unit =
-    println("Win")
+    println("You've won")
 
   def renderGame: ConsoleDisplay =
     clearConsole
@@ -95,16 +96,13 @@ case class ConsoleDisplay(
 
     println(s"Category: ${gameCategory}")
     println(s"Difficulty: ${gameDifficulty}")
-    println("|")
-    println("|")
-    println("|")
+    println("\n")
+
     println(
       "Attempts left: " +
         s" ${attemptsToAnswerCount - currentAttemptsCount}"
     )
-    println("|")
-    println("|")
-    println("|")
+    println("\n")
 
     currentAttemptsCount match
       case 0 => println(ConsoleOutput.sixAttemtsLeftHangman)
@@ -115,15 +113,12 @@ case class ConsoleDisplay(
         println(ConsoleOutput.threeAttemtsLeftHangman)
       case 4 => println(ConsoleOutput.twoAttemtsLeftHangman)
       case 5 => println(ConsoleOutput.oneAttemtsLeftHangman)
-      case _ => println("pending")
+      case _ => println("No attempts left")
+    println("\n")
 
-    println("|")
-    println("|")
-    println("|")
     println(gameController.getGuessString)
-    println("|")
-    println("|")
-    println("|")
+    println("\n")
+    
     println("Enter some char:")
     val inputChar = StdIn.readChar()
 
