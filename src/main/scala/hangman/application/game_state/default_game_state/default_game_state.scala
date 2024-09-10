@@ -34,7 +34,7 @@ case class DefaultSessionGameState(
 
         if suitableWords.nonEmpty then
           val randomWordObject = suitableWords(
-            Random.nextInt(suitableWords.size - 1)
+            Random.nextInt(suitableWords.size)
           )
 
           (
