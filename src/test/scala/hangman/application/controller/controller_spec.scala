@@ -90,7 +90,7 @@ class GameControllerSpec extends AnyFunSuite:
     val answer =
       initializedGameController.getCurrentUserSession.getCurrentGameState.getAnswer
     val randomCharIndex = Random.nextInt(answer.size)
-    val correctChar = answer(randomCharIndex)
+    val correctChar = answer(randomCharIndex).toLower
     val afterGuessGameController = initializedGameController.guess(correctChar)
 
     assert(
