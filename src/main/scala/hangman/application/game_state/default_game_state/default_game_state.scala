@@ -31,14 +31,18 @@ case class DefaultSessionGameState(
       case Some(category) =>
         val suitableWords =
           category.words.filter(_.difficulty == difficulty).toSeq
-        val randomWordObject = suitableWords(
-          Random.nextInt(suitableWords.size - 1)
-        )
-        (
-          Some(randomWordObject.content),
-          Some(randomWordObject.hint),
-          Some(category.name)
-        )
+
+        if suitableWords.nonEmpty then
+          val randomWordObject = suitableWords(
+            Random.nextInt(suitableWords.size - 1)
+          )
+
+          (
+            Some(randomWordObject.content),
+            Some(randomWordObject.hint),
+            Some(category.name)
+          )
+        else throw new IllegalArgumentException("No suitable words found for the given difficulty.")
 
       case _ => (None, None, None)
 
