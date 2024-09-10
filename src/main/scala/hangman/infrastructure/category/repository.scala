@@ -1,6 +1,6 @@
 package hangman.infrastructure.category
 
-import hangman.domain.dto.{CategoryDto, WordDto}
+import hangman.domain.dto.CategoryDto
 
 trait CategoryRepository:
   def getRandomCategory: Option[CategoryDto]

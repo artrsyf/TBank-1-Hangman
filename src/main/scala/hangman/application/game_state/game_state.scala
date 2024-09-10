@@ -4,8 +4,8 @@ import hangman.shared.enums.Difficulty
 import hangman.infrastructure.category.CategoryRepository
 
 trait GameState:
-  def getCategoryRepo: CategoryRepository
   def initializeParams(difficulty: Difficulty, category: String): GameState
+  def getCategoryRepo: CategoryRepository
   def getCategory: String
   def getDifficulty: Difficulty
   def getAnswer: String

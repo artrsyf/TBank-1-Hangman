@@ -1,16 +1,13 @@
 package hangman.presentation
 
+import scala.io.StdIn
+import scala.util.Try
+
 import hangman.application.controller.GameController
 import hangman.application.session.Session
 import hangman.shared.enums.Difficulty
 import hangman.application.game_state.GameState
-import hangman.application.session.default_session.DefaultSession
-import hangman.application.game_state.default_game_state.DefaultSessionGameState
-import hangman.infrastructure.category.memory.CategoryMemoryRepository
 import hangman.shared.constants.ConsoleOutput
-
-import scala.io.StdIn
-import scala.util.Try
 
 case class ConsoleDisplay(
   val gameController: GameController

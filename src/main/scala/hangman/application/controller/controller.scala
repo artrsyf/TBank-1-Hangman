@@ -1,8 +1,6 @@
 package hangman.application.controller
 
 import hangman.application.session.Session
-import hangman.application.session.default_session.DefaultSession
-import hangman.domain.dto.{CategoryDto, WordDto}
 
 case class GameController(val userSession: Session):
   def processUserInput(
@@ -16,7 +14,6 @@ case class GameController(val userSession: Session):
 
   def getGuessString: String =
     val currentState = userSession.getCurrentGameState
-
     val adt = currentState.getAdt
     val answer = currentState.getAnswer
 
@@ -30,22 +27,11 @@ case class GameController(val userSession: Session):
 
     copy(userSession = updatedGameSession)
 
-  // def getRandomCategory: CategoryDto = CategoryRepo.getRandomCategory.getOrElse(
-  //     throw new NoSuchElementException("pending Exception")
-  // )
-
-  // def getParticularCategory(categoryName: String): List[WordDto] =
-  //     val choosenCategory = CategoryRepo.getCategoryByName(categoryName).getOrElse(
-  //         throw new NoSuchElementException("pending Exception")
-  //     )
-
-  //     choosenCategory.words
-
   def getOpenCategories: List[String] =
     val gameState = userSession.getCurrentGameState
 
     val categories = gameState.getCategoryRepo.getAllCategories.getOrElse(
-      throw new NoSuchElementException("pending Exception")
+      throw new NoSuchElementException("There is not a single category specified")
     )
 
     categories.map(category => category.name)

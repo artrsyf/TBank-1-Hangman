@@ -2,14 +2,13 @@ package hangman.application.session.default_session
 
 import hangman.application.session.Session
 import hangman.application.game_state.GameState
-import hangman.application.game_state.default_game_state.DefaultSessionGameState
-import hangman.infrastructure.category.memory.CategoryMemoryRepository
 import hangman.shared.enums.Difficulty
 
 case class DefaultSession(
   val userId: Int,
   val currentGameState: GameState
 ) extends Session {
+
   override def defineGameParams(
     difficultyNumber: Int,
     category: String
@@ -22,6 +21,7 @@ case class DefaultSession(
 
     val updatedGameState =
       currentGameState.initializeParams(difficulty, category)
+
     copy(currentGameState = updatedGameState)
 
   override def getCurrentGameState: GameState = currentGameState

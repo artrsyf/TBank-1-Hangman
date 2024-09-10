@@ -13,7 +13,7 @@ case class DefaultSessionGameState(
   val choosenCategory: Option[String] = None,
   val answer: Option[String] = None,
   val wordHint: Option[String] = None,
-  val adt: Set[Char] = Set.empty, // Текущий результат
+  val adt: Set[Char] = Set.empty,
   val attemptsToAnswerCount: Option[Int] = None,
   val curentAttemptsCount: Int = 0,
   val isEnded: Boolean = false
@@ -40,7 +40,7 @@ case class DefaultSessionGameState(
           Some(category.name)
         )
 
-      case _ => (None, None, None) // Вывод??
+      case _ => (None, None, None)
 
     copy(
       choosenDifficulty = Some(difficulty),
@@ -53,39 +53,35 @@ case class DefaultSessionGameState(
   override def getAnswerHint: String =
     wordHint match
       case Some(hint) => hint
-      case None       => throw new Exception("pending")
+      case None       => throw new Exception("Hint hasn't been initialized")
 
-  override def getCategoryRepo: CategoryRepository =
-    categoryRepo
+  override def getCategoryRepo: CategoryRepository = categoryRepo
 
   override def getCategory: String =
     choosenCategory match
       case Some(category) => category
-      case None           => throw new Exception("pending")
+      case None           => throw new Exception("Category hasn't been initialized")
 
   override def getDifficulty: Difficulty =
     choosenDifficulty match
       case Some(difficulty) => difficulty
-      case None             => throw new Exception("pending")
+      case None             => throw new Exception("Difficulty hasn't been initialized")
 
   override def getAnswer: String =
     answer match
       case Some(answer) => answer
-      case None         => throw new Exception("pending")
+      case None         => throw new Exception("Answer hasn't been initialized")
 
-  override def getAdt: Set[Char] =
-    adt
+  override def getAdt: Set[Char] = adt
 
   override def getAttemptsToAnswerCount: Int =
     attemptsToAnswerCount match
       case Some(count) => count
-      case None        => throw new Exception("pending")
+      case None        => throw new Exception("Attempts havn't been initialized")
 
-  override def getCurentAttemptsCount: Int =
-    curentAttemptsCount
+  override def getCurentAttemptsCount: Int = curentAttemptsCount
 
-  override def isGameEnded: Boolean =
-    isEnded
+  override def isGameEnded: Boolean = isEnded
 
   override def guess(userInput: Char): GameState =
     val userInputToLower = userInput.toLower
@@ -113,5 +109,5 @@ case class DefaultSessionGameState(
           isEnded = newGameStatus
         )
 
-      case _ => throw new Exception("Answer is not generated")
+      case _ => throw new Exception("hasn't been initialized")
 }
