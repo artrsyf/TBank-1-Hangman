@@ -51,6 +51,7 @@ class DefaultSessionGameStateSpec extends AnyFunSuite:
 
     val incorrectChar = '1'
     val afterIncorrectGuessGame = afterGuessGame.guess(incorrectChar)
+    
     assert(afterIncorrectGuessGame.getAdt.contains(incorrectChar))
     assert(afterIncorrectGuessGame.getCurentAttemptsCount == 1)
 
